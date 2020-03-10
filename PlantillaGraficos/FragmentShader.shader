@@ -9,6 +9,7 @@ in vec4 fragmentColor;
 //1ro define la visualizacion del fragmento
 out vec4 salidaColor;
 
-void main() {
+void main() 
+{
 	salidaColor = fragmentColor;
 }

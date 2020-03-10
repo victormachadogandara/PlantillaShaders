@@ -16,7 +16,8 @@
 
 using namespace std;
 
-class Shader {
+class Shader
+{
 public:
 	Shader(const char* rutaVertexShader,
 		const char* rutaFragmentShader);

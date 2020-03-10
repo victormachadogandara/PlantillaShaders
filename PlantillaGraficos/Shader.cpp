@@ -1,20 +1,24 @@
 #include "Shader.h"
 
-GLuint Shader::getID() {
+GLuint Shader::getID() 
+{
 	return shaderID;
 }
 
 Shader::Shader(const char* rutaVertexShader,
-	const char* rutaFragmentShader) {
+	const char* rutaFragmentShader) 
+{
 
 	//Lectura de archivos
 	string codigoVertexShader;
 	ifstream vertexShaderStream(
 		rutaVertexShader, ios::in
 	);
-	if (vertexShaderStream.is_open()) {
+	if (vertexShaderStream.is_open()) 
+	{
 		string linea;
-		while (getline(vertexShaderStream, linea)) {
+		while (getline(vertexShaderStream, linea)) 
+		{
 			codigoVertexShader +=
 				linea + "\n";
 		}
@@ -29,9 +33,11 @@ Shader::Shader(const char* rutaVertexShader,
 	ifstream fragmentShaderStream(
 		rutaFragmentShader,
 		ios::in);
-	if (fragmentShaderStream.is_open()) {
+	if (fragmentShaderStream.is_open()) 
+	{
 		string linea;
-		while (getline(fragmentShaderStream, linea)) {
+		while (getline(fragmentShaderStream, linea))
+		{
 			codigoFragmentShader +=
 				linea + "\n";
 		}
@@ -85,17 +91,20 @@ Shader::Shader(const char* rutaVertexShader,
 
 }
 
-void Shader::verificarCompilacion(GLuint id) {
+void Shader::verificarCompilacion(GLuint id) 
+{
 	GLint resultado;
 	GLint longitudLog;
 
 	glGetShaderiv(id, GL_COMPILE_STATUS, &resultado);
 	glGetShaderiv(id, GL_INFO_LOG_LENGTH, &longitudLog);
 
-	if (resultado == GL_FALSE) {
+	if (resultado == GL_FALSE) 
+	{
 		cout << "No se pudo compilar shader" << endl;
 	}
-	if (longitudLog > 0) {
+	if (longitudLog > 0)
+	{
 		//Inicia una lista de char con el numero
 		//de elementos indicados en longitudLog
 		vector<char> mensajeError(longitudLog);
@@ -106,7 +115,8 @@ void Shader::verificarCompilacion(GLuint id) {
 		//Recorrer el vector e imprimir sus elementos
 		for (vector<char>::const_iterator i = mensajeError.begin();
 			i != mensajeError.end();
-			i++) {
+			i++)
+		{
 			cout << *i;
 		}
 		
@@ -114,23 +124,28 @@ void Shader::verificarCompilacion(GLuint id) {
 
 }
 
-void Shader::verificarVinculacion(GLuint id) {
+void Shader::verificarVinculacion(GLuint id) 
+{
 	GLint estadoVinculacion, estadoValidacion;
 	glGetProgramiv(id, GL_LINK_STATUS, &estadoVinculacion);
-	if (estadoVinculacion == GL_FALSE) {
+	if (estadoVinculacion == GL_FALSE)
+	{
 		cout << "No se pudo vincular programa" << endl;
 	}
 
 	glGetProgramiv(id, GL_VALIDATE_STATUS, &estadoValidacion);
-	if (estadoValidacion == GL_FALSE) {
+	if (estadoValidacion == GL_FALSE)
+	{
 		cout << "No se pudo validar vinculación" << endl;
 	}
 }
 
-void Shader::enlazar() {
+void Shader::enlazar()
+{
 	glUseProgram(shaderID);
 }
 
-void Shader::desenlazar() {
+void Shader::desenlazar() 
+{
 	glUseProgram(0);
 }

@@ -12,7 +12,8 @@ in vec4 color;
 out vec4 fragmentColor;
 
 //Funcion main
-void main() {
+void main() 
+{
 	//Posicion del vertice (vec4)
 	gl_Position.xyz = posicion;
 	gl_Position.w = 1.0;
